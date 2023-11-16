@@ -7,16 +7,7 @@
 #endif
 #include "listes.h"
 
-
-/*
- *  Auteur(s) :
- *  Date :
- *  Suivi des Modifications :
- *
- */
-
 bool silent_mode = false;
-
 
 cellule_t* nouvelleCellule (void)
 {
@@ -24,15 +15,13 @@ cellule_t* nouvelleCellule (void)
 }
 
 
-void detruireCellule (cellule_t* cel)
+void detruireCellule(cellule_t* cel)
 {
-    /* À compléter (utiliser free) */
-    // printf("\n>>>>>>>>>>> A Faire : liste.c/detruireCellule() <<<<<<<<<<<<<<<<\n");
     free(cel);
 }
 
 
-void conversion (char *texte, sequence_t *seq)
+void conversion(char *texte, sequence_t *seq)
 {
 	cellule_t *cel;
 	if (texte[0]) {
@@ -69,7 +58,7 @@ void conversionTete(char *texte, sequence_t *seq)
 }
 
 
-void afficher (sequence_t* seq)
+void afficher(sequence_t* seq)
 {
     assert(seq); /* Le pointeur doit être valide */
     cellule_t *cel = seq->tete;
@@ -92,16 +81,19 @@ bool prendreTete(sequence_t* seq, char *c)
 	return true;
 }
 
-
 // Ajout pile
 void creer_pile(pile_t *p) { p->n = 0; }
+
 int est_vide(pile_t *p) { return p->n == 0; }
+
 char* sommet(pile_t *p, int *x)
 {
 	*x = p->tab[p->n-1].x;
 	return p->tab[p->n-1].c;
 }
+
 int taille(pile_t *p) { return p->n; }
+
 void print(pile_t *p) {
 	for (int i = 0; i < p->n; i++)
 	{
@@ -113,26 +105,31 @@ void print(pile_t *p) {
 }
 
 void vider(pile_t *p) { creer_pile(p); }
+
 void empiler(pile_t *p, int x, char *c)
 {
 	p->tab[p->n].x = x;
 	p->tab[p->n].c = c;
 	p->n++;
 }
+
 void empilerInt(pile_t *p, int x)
 {
 	empiler(p, x, NULL);
 }
+
 void empilerChar(pile_t *p, char *c)
 {
 	empiler(p, 0, c);
 }
+
 char* depiler(pile_t *p, int *x)
 {
 	p->n--;
 	*x = p->tab[p->n].x;
 	return p->tab[p->n].c;
 }
+
 int depilerInt(pile_t *p)
 {
 	int x;
@@ -140,6 +137,7 @@ int depilerInt(pile_t *p)
 	assert(c == NULL);
 	return x;
 }
+
 char* depilerChar(pile_t *p)
 {
 	int x;
