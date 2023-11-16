@@ -197,10 +197,7 @@ int interprete (sequence_t* seq, bool debug)
 				assert(ca == NULL && cb != NULL);	// a == int && cb == char*
 				if (a > 0)
 				{
-					cc = malloc(sizeof(char) * 2);
-					strcpy(cc, "B");
-					conversionTete(cc, seq);
-					free(cc);
+					conversionTete("B", seq);
 					conversionTete(cb, seq);
 					empilerChar(pile, cb);
 					empilerInt(pile, a - 1);
