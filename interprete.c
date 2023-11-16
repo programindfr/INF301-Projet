@@ -51,14 +51,14 @@ int interprete(sequence_t* seq, bool debug)
             
             case 'M':
             	ca = depiler(pile, &a);
-            	assert(ca == NULL);	// Mesure sur un char* !
+            	if (debug) assert(ca == NULL);	// Mesure sur un char* !
         		b = mesure(a);
             	empilerInt(pile, b);
                 break;
             
             case 'P':
             	ca = depiler(pile, &a);
-            	assert(ca == NULL);	// Pose sur un char* !
+            	if (debug) assert(ca == NULL);	// Pose sur un char* !
                 pose(a);
                 break;
 			
@@ -69,28 +69,28 @@ int interprete(sequence_t* seq, bool debug)
 			case '+':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				assert(ca == NULL && cb == NULL);	// + sur un char* !
+				if (debug) assert(ca == NULL && cb == NULL);	// + sur un char* !
 				empilerInt(pile, (b + a));
 				break;
 			
 			case '-':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				assert(ca == NULL && cb == NULL);	// - sur un char* !
+				if (debug) assert(ca == NULL && cb == NULL);	// - sur un char* !
 				empilerInt(pile, (b - a));
 				break;
 			
 			case '*':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				assert(ca == NULL && cb == NULL);	// * sur un char* !
+				if (debug) assert(ca == NULL && cb == NULL);	// * sur un char* !
 				empilerInt(pile, (b * a));
 				break;
 			
 			case '/':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				assert(ca == NULL && cb == NULL);	// / sur un char* !
+				if (debug) assert(ca == NULL && cb == NULL);	// / sur un char* !
 				empilerInt(pile, (b / a));
 				break;
 			
@@ -128,7 +128,7 @@ int interprete(sequence_t* seq, bool debug)
 				ca = depiler(pile, &a);	// F
 				cb = depiler(pile, &b);	// V
 				cc = depiler(pile, &c);	// n
-				assert(ca != NULL && cb != NULL && cc == NULL);
+				if (debug) assert(ca != NULL && cb != NULL && cc == NULL);
 				if (c == 0)
 				{
 					conversionTete(ca, seq);
@@ -143,7 +143,7 @@ int interprete(sequence_t* seq, bool debug)
 			
 			case '!':
 				ca = depiler(pile, &a);	// e
-				assert(ca != NULL);	// Pas d'execution d'entiers
+				if (debug) assert(ca != NULL);	// Pas d'execution d'entiers
 				conversionTete(ca, seq);
 				break;
 			
@@ -180,7 +180,7 @@ int interprete(sequence_t* seq, bool debug)
 			case 'B':
 				ca = depiler(pile, &a);	// n
 				cb = depiler(pile, &b);	// cmd
-				assert(ca == NULL && cb != NULL);	// a == int && cb == char*
+				if (debug) assert(ca == NULL && cb != NULL);	// a == int && cb == char*
 				if (a > 0)
 				{
 					conversionTete("B", seq);
@@ -193,7 +193,7 @@ int interprete(sequence_t* seq, bool debug)
 			case 'R':
 				ca = depiler(pile, &a);	// x
 				cb = depiler(pile, &b);	// n
-				assert(ca == NULL && cb == NULL);	// x et n entiers
+				if (debug) assert(ca == NULL && cb == NULL);	// x et n entiers
 				for (int j = 0; j < a; j++)
 				{
 					pile_elem e = pile->tab[pile->n - b];
