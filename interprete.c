@@ -188,6 +188,15 @@ int interprete(sequence_t* seq, bool debug)
 				ca = depiler(pile, &a);	// x
 				cb = depiler(pile, &b);	// n
 				assert(ca == NULL && cb == NULL);	// x et n entiers
+				for (int j = 0; j < a; j++)
+				{
+					pile_elem e = pile->tab[pile->n - b];
+					for (int i = pile->n - b + 1; i < pile->n; i++)
+					{
+						pile->tab[i - 1] = pile->tab[i];
+					}
+					pile->tab[pile->n - 1] = e;
+				}
 				break;
 
             default:
