@@ -7,6 +7,7 @@
 #endif
 #include "listes.h"
 #include "curiosity.h"
+#include <string.h>
 
 
 /*
@@ -150,6 +151,42 @@ int interprete (sequence_t* seq, bool debug)
 				{
 					conversionTete(cb, seq);
 				}
+				break; /* à ne jamais oublier !!! */
+			
+			case '!':
+				ca = depiler(pile, &a);	// e
+				assert(ca != NULL);	// Pas d'execution d'entiers
+				conversionTete(ca, seq);
+				break; /* à ne jamais oublier !!! */
+			
+			case 'X':
+				ca = depiler(pile, &a);	// a
+				cb = depiler(pile, &b);	// b
+				empiler(pile, a, ca);
+				empiler(pile, b, cb);
+				break; /* à ne jamais oublier !!! */
+			
+			case 'C':
+				ca = depiler(pile, &a);	// e
+				if (ca == NULL)
+				{
+					empilerInt(pile, a);
+					empilerInt(pile, a);
+				}
+				else
+				{
+					empilerChar(pile, ca);
+					int size = strlen(ca);
+					cb = malloc(sizeof(char) * size);
+					strcpy(cb, ca);
+					empilerChar(pile, cb);
+				}
+				break; /* à ne jamais oublier !!! */
+			
+			case 'I':
+				ca = depiler(pile, &a);	// e
+				if (ca != NULL)
+					free(ca);
 				break; /* à ne jamais oublier !!! */
 
             default:
