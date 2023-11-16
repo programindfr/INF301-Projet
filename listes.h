@@ -40,7 +40,7 @@ void afficher (sequence_t* seq);
 
 bool prendreTete(sequence_t* seq, char *c);
 
-#define N_MAX_PILE 10000000
+#define N_MAX_PILE 100000000
 
 typedef struct {
 	int x;

@@ -96,7 +96,7 @@ int interprete(sequence_t* seq, bool debug)
 			
 			case '{':
 				prendreTete(seq, &commande);
-				int sizeca = 2;
+				int sizeca = 1;
 				ca = malloc(sizeof(char) * sizeca);
 				int i;
 				int flag = true;
@@ -113,7 +113,7 @@ int interprete(sequence_t* seq, bool debug)
 							count--;
 						if (i > sizeca)
 						{
-							sizeca *= 2;
+							sizeca *= 256;
 							ca = realloc(ca, sizeof(char) * sizeca);
 						}
 						ca[i] = commande;
