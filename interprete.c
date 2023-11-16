@@ -146,10 +146,12 @@ int interprete (sequence_t* seq, bool debug)
 				if (c == 0)
 				{
 					conversionTete(ca, seq);
+					free(ca);
 				}
 				else
 				{
 					conversionTete(cb, seq);
+					free(cb);
 				}
 				break; /* à ne jamais oublier !!! */
 			
@@ -187,6 +189,22 @@ int interprete (sequence_t* seq, bool debug)
 				ca = depiler(pile, &a);	// e
 				if (ca != NULL)
 					free(ca);
+				break; /* à ne jamais oublier !!! */
+			
+			case 'B':
+				ca = depiler(pile, &a);	// n
+				cb = depiler(pile, &b);	// cmd
+				assert(ca == NULL && cb != NULL);	// a == int && cb == char*
+				if (a > 0)
+				{
+					cc = malloc(sizeof(char) * 2);
+					strcpy(cc, "B");
+					conversionTete(cc, seq);
+					free(cc);
+					conversionTete(cb, seq);
+					empilerChar(pile, cb);
+					empilerInt(pile, a - 1);
+				}
 				break; /* à ne jamais oublier !!! */
 
             default:

@@ -133,3 +133,17 @@ char* depiler(pile_t *p, int *x)
 	*x = p->tab[p->n].x;
 	return p->tab[p->n].c;
 }
+int depilerInt(pile_t *p)
+{
+	int x;
+	char *c = depiler(p, &x);
+	assert(c == NULL);
+	return x;
+}
+char* depilerChar(pile_t *p)
+{
+	int x;
+	char *c = depiler(p, &x);
+	assert(c != NULL);
+	return c;
+}

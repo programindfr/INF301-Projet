@@ -79,5 +79,7 @@ void empiler(pile_t *p, int x, char *c);
 void empilerInt(pile_t *p, int x);
 void empilerChar(pile_t *p, char *c);
 char* depiler(pile_t *p, int *x);
+int depilerInt(pile_t *p);
+char* depilerChar(pile_t *p);
 
 #endif
