@@ -9,7 +9,8 @@ A lire absolument !
 Renseignez ici les noms des membres de votre binôme :
 
 Nom1 - prénom1 : GRANGE Léo
-Nom2 - prénom2 : RIVET Mathias
+Nom2 - prénom2 : PERRIER Maël
+Nom3 - prénom3 : RIVET Mathias
 
 Si vous avez des commentaires, remarques etc. pour le rendu, vous pouvez les 
 mettre ici:
