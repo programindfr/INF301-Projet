@@ -70,27 +70,15 @@ int interprete (sequence_t* seq, bool debug)
             
             case 'M':
             	ca = depiler(pile, &a);
-            	if (ca == NULL)
-            	{
-            		b = mesure(a);
-                	empilerInt(pile, b);
-            	}
-            	else
-            	{
-            		fprintf(stderr, "Mesure sur un char* !");
-            		assert(NULL);
-            	}
+            	assert(ca == NULL);	// Mesure sur un char* !
+        		b = mesure(a);
+            	empilerInt(pile, b);
                 break; /* à ne jamais oublier !!! */
             
             case 'P':
             	ca = depiler(pile, &a);
-            	if (ca == NULL)
-                	pose(a);
-                else
-            	{
-            		fprintf(stderr, "Pose sur un char* !");
-            		assert(NULL);
-            	}
+            	assert(ca == NULL);	// Pose sur un char* !
+                pose(a);
                 break; /* à ne jamais oublier !!! */
 			
 			case '0' ... '9':
@@ -100,49 +88,29 @@ int interprete (sequence_t* seq, bool debug)
 			case '+':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				if (ca == NULL && cb == NULL)
-					empilerInt(pile, (b + a));
-				else
-            	{
-            		fprintf(stderr, "+ sur un char* !");
-            		assert(NULL);
-            	}
+				assert(ca == NULL && cb == NULL);	// + sur un char* !
+				empilerInt(pile, (b + a));
 				break; /* à ne jamais oublier !!! */
 			
 			case '-':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				if (ca == NULL && cb == NULL)
-					empilerInt(pile, (b - a));
-				else
-            	{
-            		fprintf(stderr, "- sur un char* !");
-            		assert(NULL);
-            	}
+				assert(ca == NULL && cb == NULL);	// - sur un char* !
+				empilerInt(pile, (b - a));
 				break; /* à ne jamais oublier !!! */
 			
 			case '*':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				if (ca == NULL && cb == NULL)
-					empilerInt(pile, (b * a));
-				else
-            	{
-            		fprintf(stderr, "* sur un char* !");
-            		assert(NULL);
-            	}
+				assert(ca == NULL && cb == NULL);	// * sur un char* !
+				empilerInt(pile, (b * a));
 				break; /* à ne jamais oublier !!! */
 			
 			case '/':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
-				if (ca == NULL && cb == NULL)
-					empilerInt(pile, (b / a));
-				else
-            	{
-            		fprintf(stderr, "/ sur un char* !");
-            		assert(NULL);
-            	}
+				assert(ca == NULL && cb == NULL);	// / sur un char* !
+				empilerInt(pile, (b / a));
 				break; /* à ne jamais oublier !!! */
 			
 			case '{':
@@ -173,16 +141,14 @@ int interprete (sequence_t* seq, bool debug)
 				ca = depiler(pile, &a);	// F
 				cb = depiler(pile, &b);	// V
 				cc = depiler(pile, &c);	// n
-				if (ca != NULL && cb != NULL && cc == NULL)
+				assert(ca != NULL && cb != NULL && cc == NULL);
+				if (c == 0)
 				{
-					if (c == 0)
-					{
-						conversionTete(ca, seq);
-					}
-					else
-					{
-						conversionTete(cb, seq);
-					}
+					conversionTete(ca, seq);
+				}
+				else
+				{
+					conversionTete(cb, seq);
 				}
 				break; /* à ne jamais oublier !!! */
 
