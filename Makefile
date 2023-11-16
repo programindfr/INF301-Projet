@@ -9,7 +9,7 @@ CFLAGS= -gdwarf-4 -Wall -Wextra -Werror -Wno-unused-parameter
 ## Flags de compilation pour les tests de performance.
 ## A decommenter pour desactiver tous les affichages, puis forcer la 
 ## recompilation avec 'make -B'
-# CFLAGS=-O3 -g -Wall -Wextra -Werror -DSILENT -Wno-unused-parameter
+#CFLAGS=-O3 -gdwarf-4 -Wall -Wextra -Werror -DSILENT -Wno-unused-parameter
 
 
 

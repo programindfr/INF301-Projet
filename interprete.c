@@ -95,8 +95,9 @@ int interprete(sequence_t* seq, bool debug)
 				break;
 			
 			case '{':
-				ca = malloc(sizeof(char) * 512);
 				prendreTete(seq, &commande);
+				int sizeca = 2;
+				ca = malloc(sizeof(char) * sizeca);
 				int i;
 				int flag = true;
 				int count = 0;
@@ -110,6 +111,11 @@ int interprete(sequence_t* seq, bool debug)
 							count++;
 						else if (commande == '}' && count > 0)
 							count--;
+						if (i > sizeca)
+						{
+							sizeca *= 2;
+							ca = realloc(ca, sizeof(char) * sizeca);
+						}
 						ca[i] = commande;
 						prendreTete(seq, &commande);
 					}
@@ -200,7 +206,7 @@ int interprete(sequence_t* seq, bool debug)
 				break;
 
             default:
-                eprintf("Caractère inconnu: '%c'\n", commande);
+                if (debug) eprintf("Caractère inconnu: '%c'\n", commande);
         }
 
         /* Affichage pour faciliter le debug */
