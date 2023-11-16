@@ -9,28 +9,15 @@
 #include "curiosity.h"
 #include <string.h>
 
-
-/*
- *  Auteur(s) :
- *  Date :
- *  Suivi des Modifications :
- *
- */
-
-void stop (void)
+void stop(void)
 {
     char enter = '\0';
     printf ("Appuyer sur entrée pour continuer...\n");
     while (enter != '\r' && enter != '\n') { enter = getchar(); }
 }
 
-
-
-int interprete (sequence_t* seq, bool debug)
+int interprete(sequence_t* seq, bool debug)
 {
-    // Version temporaire a remplacer par une lecture des commandes dans la
-    // liste chainee et leur interpretation.
-
     char commande;
     int a, b, c;
     char *ca = NULL;
@@ -39,80 +26,73 @@ int interprete (sequence_t* seq, bool debug)
 	pile_t *pile = malloc(sizeof(pile_t));
 	creer_pile(pile);
 
-
-    debug = false; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
-
     printf ("Programme:");
     afficher(seq);
     printf ("\n");
     if (debug) stop();
 
-    // À partir d'ici, beaucoup de choses à modifier dans la suite.
-    int ret;         //utilisée pour les valeurs de retour
+    int ret;
 
-    while (prendreTete(seq, &commande)) { //à modifier: condition de boucle
-
+    while (prendreTete(seq, &commande)) {
         switch (commande) {
-            /* Ici on avance tout le temps, à compléter pour gérer d'autres commandes */
-
             case 'A':
                 ret = avance();
                 if (ret == VICTOIRE) return VICTOIRE; /* on a atteint la cible */
                 if (ret == RATE)     return RATE;     /* tombé dans l'eau ou sur un rocher */
-                break; /* à ne jamais oublier !!! */
+                break;
             
             case 'D':
                 droite();
-                break; /* à ne jamais oublier !!! */
+                break;
             
             case 'G':
                 gauche();
-                break; /* à ne jamais oublier !!! */
+                break;
             
             case 'M':
             	ca = depiler(pile, &a);
             	assert(ca == NULL);	// Mesure sur un char* !
         		b = mesure(a);
             	empilerInt(pile, b);
-                break; /* à ne jamais oublier !!! */
+                break;
             
             case 'P':
             	ca = depiler(pile, &a);
             	assert(ca == NULL);	// Pose sur un char* !
                 pose(a);
-                break; /* à ne jamais oublier !!! */
+                break;
 			
 			case '0' ... '9':
 				empilerInt(pile, commande - 48);
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '+':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
 				assert(ca == NULL && cb == NULL);	// + sur un char* !
 				empilerInt(pile, (b + a));
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '-':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
 				assert(ca == NULL && cb == NULL);	// - sur un char* !
 				empilerInt(pile, (b - a));
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '*':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
 				assert(ca == NULL && cb == NULL);	// * sur un char* !
 				empilerInt(pile, (b * a));
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '/':
 				ca = depiler(pile, &a);
 				cb = depiler(pile, &b);
 				assert(ca == NULL && cb == NULL);	// / sur un char* !
 				empilerInt(pile, (b / a));
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '{':
 				ca = malloc(sizeof(char) * 512);
@@ -136,7 +116,7 @@ int interprete (sequence_t* seq, bool debug)
 				}
 				ca[i-1] = '\0';
 				empilerChar(pile, ca);
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '?':
 				ca = depiler(pile, &a);	// F
@@ -153,20 +133,20 @@ int interprete (sequence_t* seq, bool debug)
 					conversionTete(cb, seq);
 					free(cb);
 				}
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case '!':
 				ca = depiler(pile, &a);	// e
 				assert(ca != NULL);	// Pas d'execution d'entiers
 				conversionTete(ca, seq);
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case 'X':
 				ca = depiler(pile, &a);	// a
 				cb = depiler(pile, &b);	// b
 				empiler(pile, a, ca);
 				empiler(pile, b, cb);
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case 'C':
 				ca = depiler(pile, &a);	// e
@@ -183,13 +163,13 @@ int interprete (sequence_t* seq, bool debug)
 					strcpy(cb, ca);
 					empilerChar(pile, cb);
 				}
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case 'I':
 				ca = depiler(pile, &a);	// e
 				if (ca != NULL)
 					free(ca);
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case 'B':
 				ca = depiler(pile, &a);	// n
@@ -202,7 +182,7 @@ int interprete (sequence_t* seq, bool debug)
 					empilerChar(pile, cb);
 					empilerInt(pile, a - 1);
 				}
-				break; /* à ne jamais oublier !!! */
+				break;
 			
 			case 'R':
 				ca = depiler(pile, &a);	// x
@@ -217,7 +197,7 @@ int interprete (sequence_t* seq, bool debug)
 					}
 					pile->tab[pile->n - 1] = e;
 				}
-				break; /* à ne jamais oublier !!! */
+				break;
 
             default:
                 eprintf("Caractère inconnu: '%c'\n", commande);

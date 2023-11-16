@@ -6,18 +6,10 @@
 #include "listes.h"
 #include "curiosity.h"
 
-/*
- *  Auteur(s) :
- *  Date :
- *  Suivi des Modifications :
- *
- */
-
 struct carte mars;
 
 unsigned int cX=9999,cY=9999; // Position de curiosity (cX,cY)
 int dX=1,dY=0;  // Direction de curiosity (dX,dY)=(1,0)|(-1,0)|(0,1)|(0,-1)
-
 
 void initCarte (int carte_num)
 {
@@ -73,9 +65,9 @@ void ajoutLigneCarte (char *ligne)
 }
 
 
-int char_to_color (char c);
+int char_to_color(char c);
 
-void afficherCarte ()
+void afficherCarte(void)
 {
     unsigned int i,j;
     char c;
@@ -110,10 +102,7 @@ void afficherCarte ()
     return;
 }
 
-/* Vérifie que toutes les marques sur la carte de test ont bien été 
- * posées par Curiosity, et que Curiosity n'a pas posé plus de marques
- * que demandé. */
-bool verifieMarques (void)
+bool verifieMarques(void)
 {
     unsigned int i,j;
     bool erreur = false;
@@ -229,7 +218,7 @@ char charMesure(int dir) {
     }
 }
 
-int char_to_color (char c) {
+int char_to_color(char c) {
     switch (c) {
         case TARGET:return CTARGET;
         case PLAIN: return CPLAIN;
@@ -237,12 +226,12 @@ int char_to_color (char c) {
         case WATER: return CWATER;
         case ROCK:  return CROCK;
         default: 
-                eprintf("Terrain inconnu: %c\n", c);
-                assert (false);
+            eprintf("Terrain inconnu: %c\n", c);
+            assert (false);
     }
 }
 
-int char_to_mesure (char c) {
+int char_to_mesure(char c) {
     switch (c) {
         case TARGET:
         case PLAIN: return 0;
@@ -250,8 +239,8 @@ int char_to_mesure (char c) {
         case WATER: return 2;
         case ROCK:  return 3;
         default:
-                eprintf("Terrain inconnu: %c\n", c);
-                assert (false);
+            eprintf("Terrain inconnu: %c\n", c);
+            assert (false);
     }
 }
 
@@ -259,7 +248,7 @@ int mesure(int dir) {
     return char_to_mesure (charMesure(dir));
 }
 
-void pose (int arg) {
+void pose(int arg) {
     if (arg == 0) {
         mars.map[cY][cX]= PLAIN;
     } else {

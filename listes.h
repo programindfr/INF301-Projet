@@ -3,14 +3,6 @@
 
 #include <stdbool.h>
 
-/*
- * Pour réaliser des tests de performance, désactiver tous les 
- * affichages.
- * Pour cela, le plus simple est de redefinir les fonctions principales 
- * en decommentant les 3 lignes suivantes et en commentant l'ancienne 
- * definition de 'eprintf' juste dessous.
- */
-
 #ifdef SILENT
 
 #define printf(fmt, ...) (0)
@@ -24,9 +16,6 @@
 #endif
 
 extern bool silent_mode;
-
-
-
 
 struct cellule {
     char   command;
@@ -50,10 +39,6 @@ void conversionTete(char *texte, sequence_t *seq);
 void afficher (sequence_t* seq);
 
 bool prendreTete(sequence_t* seq, char *c);
-
-// Ajout pile
-/*enum operation { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, / };*/
-/*typedef enum operation operation_t;*/
 
 #define N_MAX_PILE 4096
 

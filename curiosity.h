@@ -12,10 +12,22 @@
 #define ROCK  '#'
 #define TARGET '@'
 
-enum { CPLAIN, CMARK, CWATER, CROCK, CTARGET, CURIOSITY }; /* colors */
+enum { 
+    CPLAIN, 
+    CMARK, 
+    CWATER, 
+    CROCK, 
+    CTARGET, 
+    CURIOSITY 
+}; /* colors */
 
 
-enum { RATE, CIBLERATEE, REUSSI, VICTOIRE };
+enum { 
+    RATE, 
+    CIBLERATEE, 
+    REUSSI, 
+    VICTOIRE 
+};
 
 struct carte
 {
@@ -31,10 +43,10 @@ extern struct carte mars;
 extern unsigned int cX,cY; // Position de curiosity (cX,cY)
 extern int dX,dY;  // Direction de curiosity (dX,dY)=(1,0)|(-1,0)|(0,1)|(0,-1)
 
-void initCarte (int carte_num);
-void ajoutLigneCarte (char*);
+void initCarte(int carte_num);
+void ajoutLigneCarte(char*);
 
-bool verifieMarques (void);
+bool verifieMarques(void);
 
 void lireCarte(void);
 void afficherCarte(void);
