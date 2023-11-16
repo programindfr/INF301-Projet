@@ -203,6 +203,12 @@ int interprete (sequence_t* seq, bool debug)
 					empilerInt(pile, a - 1);
 				}
 				break; /* à ne jamais oublier !!! */
+			
+			case 'R':
+				ca = depiler(pile, &a);	// x
+				cb = depiler(pile, &b);	// n
+				assert(ca == NULL && cb == NULL);	// x et n entiers
+				break; /* à ne jamais oublier !!! */
 
             default:
                 eprintf("Caractère inconnu: '%c'\n", commande);
