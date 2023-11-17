@@ -136,10 +136,10 @@ void vider(pile_t *p)
 
 void empiler(pile_t *p, int x, char *c)
 {
-	if (p->n > p->max)
+	if (p->n >= p->max)
 	{
 		p->max *= 2;
-		p->tab = realloc(p->tab, sizeof(pile_t) * p->max);
+		p->tab = realloc(p->tab, sizeof(pile_elem) * p->max);
 	}
 	p->tab[p->n].x = x;
 	p->tab[p->n].c = c;
