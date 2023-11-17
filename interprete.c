@@ -217,6 +217,15 @@ int interprete(sequence_t* seq, bool debug)
 					pile->tab[pile->n - 1] = e;
 				}
 				break;
+			
+			case 'Z':
+				for (int j = 0; j < taille(pile) / 2; j++)
+				{
+					pile_elem e = pile->tab[j];
+					pile->tab[j] = pile->tab[pile->n - j - 1];
+					pile->tab[pile->n - j - 1] = e;
+				}
+				break;
 
             default:
                 if (debug) eprintf("Caractère inconnu: '%c'\n", commande);
