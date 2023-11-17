@@ -127,7 +127,7 @@ int interprete(sequence_t* seq, bool debug)
 							count--;
 						if (i >= sizeca)
 						{
-							sizeca *= 2;
+							sizeca *= 256;
 							ca = realloc(ca, sizeof(char) * sizeca);
 						}
 						ca[i] = commande;

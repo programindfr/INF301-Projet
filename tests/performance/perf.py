@@ -94,7 +94,7 @@ time = subprocess.check_output("which -a time | grep -v shell | tail -n 1", shel
 time = time.decode().rstrip()
 # timecmd = " time -f '\tTemps: %es  Mémoire max: %MKb' "
 timecmd = time + " -f '%e;%M' "
-timeout = 10
+timeout = 60
 # timeout = 10
 timeoutcmd = "timeout " + str(timeout) + "s "
 

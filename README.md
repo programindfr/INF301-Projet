@@ -1,5 +1,6 @@
-# remplacer empiler/depiler par la version haut niveau avec assert
+# Projet de l'APP2 d'INF301
 
-# challenge mysterieuZe
-
-# perf
+Groupe :
+	- PERRIER Maël
+	- GRANGE Léo
+	- RIVET Mathias
