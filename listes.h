@@ -32,6 +32,7 @@ typedef struct sequence sequence_t;
 cellule_t* nouvelleCellule (void);
 
 void detruireCellule (cellule_t*);
+void detruireSequence (sequence_t* seq);
 
 void conversion (char *texte, sequence_t *seq);
 void conversionTete(char *texte, sequence_t *seq);
@@ -40,7 +41,7 @@ void afficher (sequence_t* seq);
 
 bool prendreTete(sequence_t* seq, char *c);
 
-#define N_MAX_PILE 100000000
+#define N_MAX_PILE 512
 
 typedef struct {
 	int x;
@@ -48,8 +49,9 @@ typedef struct {
 } pile_elem;
 
 struct pile {
+	int max;
 	int n;
-	pile_elem tab[N_MAX_PILE];
+	pile_elem *tab;
 };
 typedef struct pile pile_t;
 

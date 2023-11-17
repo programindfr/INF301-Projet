@@ -37,8 +37,22 @@ int interprete(sequence_t* seq, bool debug)
         switch (commande) {
             case 'A':
                 ret = avance();
-                if (ret == VICTOIRE) return VICTOIRE; /* on a atteint la cible */
-                if (ret == RATE)     return RATE;     /* tombé dans l'eau ou sur un rocher */
+                if (ret == VICTOIRE)
+                {
+                	vider(pile);
+                	free(pile->tab);
+                	free(pile);
+                	detruireSequence(seq);
+                	return VICTOIRE; /* on a atteint la cible */
+                }
+                if (ret == RATE)
+                {
+                	vider(pile);
+                	free(pile->tab);
+                	free(pile);
+                	detruireSequence(seq);
+                	return RATE;     /* tombé dans l'eau ou sur un rocher */
+                }
                 break;
             
             case 'D':
@@ -111,9 +125,9 @@ int interprete(sequence_t* seq, bool debug)
 							count++;
 						else if (commande == '}' && count > 0)
 							count--;
-						if (i > sizeca)
+						if (i >= sizeca)
 						{
-							sizeca *= 256;
+							sizeca *= 2;
 							ca = realloc(ca, sizeof(char) * sizeca);
 						}
 						ca[i] = commande;
@@ -130,21 +144,18 @@ int interprete(sequence_t* seq, bool debug)
 				cc = depiler(pile, &c);	// n
 				if (debug) assert(ca != NULL && cb != NULL && cc == NULL);
 				if (c == 0)
-				{
 					conversionTete(ca, seq);
-					free(ca);
-				}
 				else
-				{
 					conversionTete(cb, seq);
-					free(cb);
-				}
+				free(ca);
+				free(cb);
 				break;
 			
 			case '!':
 				ca = depiler(pile, &a);	// e
 				if (debug) assert(ca != NULL);	// Pas d'execution d'entiers
 				conversionTete(ca, seq);
+				free(ca);
 				break;
 			
 			case 'X':
@@ -188,6 +199,8 @@ int interprete(sequence_t* seq, bool debug)
 					empilerChar(pile, cb);
 					empilerInt(pile, a - 1);
 				}
+				else
+					free(cb);
 				break;
 			
 			case 'R':
@@ -221,5 +234,9 @@ int interprete(sequence_t* seq, bool debug)
     /* Si on sort de la boucle sans arriver sur la cible,
      * c'est raté :-( */
 
+	vider(pile);
+	free(pile->tab);
+	free(pile);
+	detruireSequence(seq);
     return CIBLERATEE;
 }

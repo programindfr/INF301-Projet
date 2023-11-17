@@ -21,6 +21,20 @@ void detruireCellule(cellule_t* cel)
 }
 
 
+void detruireSequence(sequence_t* seq)
+{
+	cellule_t *cel = seq->tete;
+	cellule_t *suiv = NULL;
+	while (cel->suivant != NULL)
+	{
+		suiv = cel->suivant;
+		detruireCellule(cel);
+		cel = suiv;
+	}
+	detruireCellule(cel);
+}
+
+
 void conversion(char *texte, sequence_t *seq)
 {
 	cellule_t *cel;
@@ -82,7 +96,12 @@ bool prendreTete(sequence_t* seq, char *c)
 }
 
 // Ajout pile
-void creer_pile(pile_t *p) { p->n = 0; }
+void creer_pile(pile_t *p)
+{
+	p->max = N_MAX_PILE;
+	p->n = 0;
+	p->tab = malloc(sizeof(pile_elem) * p->max);
+}
 
 int est_vide(pile_t *p) { return p->n == 0; }
 
@@ -104,10 +123,24 @@ void print(pile_t *p) {
 	}
 }
 
-void vider(pile_t *p) { creer_pile(p); }
+void vider(pile_t *p)
+{
+	for (int i = 0; i < p->n; i++)
+	{
+		if (p->tab[i].c != NULL)
+			free(p->tab[i].c);
+	}
+	free(p->tab);
+	creer_pile(p);
+}
 
 void empiler(pile_t *p, int x, char *c)
 {
+	if (p->n > p->max)
+	{
+		p->max *= 2;
+		p->tab = realloc(p->tab, sizeof(pile_t) * p->max);
+	}
 	p->tab[p->n].x = x;
 	p->tab[p->n].c = c;
 	p->n++;
