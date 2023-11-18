@@ -15,11 +15,12 @@ Nom3 - prénom3 : RIVET Mathias
 Si vous avez des commentaires, remarques etc. pour le rendu, vous pouvez les 
 mettre ici:
 
-...
-...
-...
 
+Etude de compléxité empirique selon les graphiques.
 
+Compléxité constante : memfree
+Compléxité linéaire : base, long et piiile
+Compléxité en O(n²) : nested
 
 
 ****************************************************************
